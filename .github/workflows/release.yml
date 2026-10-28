@@ -16,3 +16,4 @@ jobs:
         run: |
           gh release delete latest --cleanup-tag --yes -R "$GITHUB_REPOSITORY" || true
           gh release create latest --prerelease --target "${{ inputs.sha }}" --title t --notes t -R "$GITHUB_REPOSITORY"
+# change
