@@ -1,0 +1,17 @@
+name: release test
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        required: true
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --cleanup-tag --yes -R "$GITHUB_REPOSITORY" || true
+          gh release create latest --prerelease --target "${{ inputs.sha }}" --title t --notes t -R "$GITHUB_REPOSITORY"
